@@ -47,7 +47,23 @@ print("*"*75)
 # All this together means you will have an intensive while loop that includes multiple if statements, likely with some nesting 
 # The sum should start at 0 
 
-num_sum = 0 
+while True:
+    user_num = input("Enter a number or enter 'exit' to end: ")
+    if user_num.lower() == 'exit':
+        break
+    if user_num.startswith("-"):
+        user_num = user_num.replace("-", "")  # Assign the result back
+        is_negative = True
+    else:
+        is_negative = False
+    if user_num.isdigit():  # Corrected variable name
+        if is_negative:
+            num_sum -= int(user_num)
+            is_negative = False
+        else:
+            num_sum += int(user_num)
+    else:
+        print("Invalid input. Please enter an integer or 'exit'.")     
 
 print(f"Your final sum is {num_sum}")
 
@@ -68,5 +84,42 @@ print("*"*75)
     # So, it should function the same for `5 + 6` as `5+6`
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
+import re
 
-        
+def calculate(expression):
+    parts = re.split(r'(\+|\-|\*|\/|\%)', expression.replace(" ", ""))
+
+    if len(parts) != 3:
+        return "Invalid expression."
+    operand1, operator, operand2 = parts
+    
+    if not operand1.isdigit() or not operand2.isdigit():
+        return "Invalid operands."
+    
+    operand1 = int(operand1)
+    operand2 = int(operand2)
+
+    if operator == '+':
+        result = operand1 + operand2
+    elif operator == '-':
+        result = operand1 - operand2
+    elif operator == '*':
+        result = operand1 * operand2
+    elif operator == '/':
+        if operand2 == 0:
+            return "Division by zero error."
+        result = operand1 / operand2
+    elif operator == '%':
+        result = operand1 % operand2
+    else:
+        return "Invalid operator."
+    
+    return result
+
+while True:
+    expression = input("Enter an expression (e.g., 5 + 6 or 5+6) or 'exit': ")
+    if expression.lower() == 'exit':
+        break
+
+    result = calculate(expression) # Corrected the function call
+    print(result)     
