@@ -1,8 +1,8 @@
-# Your Name Here
+# Michael Cook
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section: 
+# Submission Date 10/28/24
+# Lab 07
+# Lab Section: 16
 # Sources, people worked with, help given to: 
 # your
 # comments
@@ -17,7 +17,17 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
-factorial = 1
+while True:
+    upper_bound = input("Enter a positive integer: ")
+    if upper_bound.isdigit() and int(upper_bound) > 0:
+        upper_bound = int(upper_bound)
+        factorial = 1
+        for n in range(1,upper_bound +1):
+            factorial *= n
+        break
+
+    else:
+      print("Invalid input. Please enter a positive integer.")
 
 print(f"The result of the factorial based on the given bound is {factorial}")
 
